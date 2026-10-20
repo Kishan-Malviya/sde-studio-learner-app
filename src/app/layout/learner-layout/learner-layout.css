@@ -10,9 +10,10 @@
 
 .learner-sidenav {
   width: 260px;
-  border-right: 1px solid #e2e8f0;
+  border-right: none;
   background: #ffffff;
   border-radius: 0;
+  position: fixed;
 }
 
 .learner-main {

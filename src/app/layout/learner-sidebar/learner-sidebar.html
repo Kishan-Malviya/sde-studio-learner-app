@@ -1,13 +1,7 @@
 <div class="sidebar-content">
-  <a class="brand" routerLink="/dashboard" (click)="navigate.emit()">
-    <span class="brand-icon">
-      <mat-icon>school</mat-icon>
-    </span>
-
-    <span class="brand-copy">
-      <span class="brand-name">SDE STUDIO</span>
-      <span class="brand-subtitle">LEARNER PORTAL</span>
-    </span>
+  <a class="landing-brand" routerLink="/" aria-label="TheSDEStudio home">
+    <span class="landing-brand-mark"><mat-icon>terminal</mat-icon></span>
+    <span>TheSDE<span>Studio</span></span>
   </a>
 
   <div class="navigation-groups">
@@ -31,16 +25,5 @@
         </mat-nav-list>
       </section>
     }
-  </div>
-
-  <div class="sidebar-footer">
-    <div class="help-icon">
-      <mat-icon>help_outline</mat-icon>
-    </div>
-
-    <div class="help-copy">
-      <span class="help-title">Need help?</span>
-      <span class="help-description">Keep your learning on track.</span>
-    </div>
   </div>
 </div>

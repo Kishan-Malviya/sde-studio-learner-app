@@ -22,3 +22,12 @@ Main areas
 - app/core/services/learning-progress.ts — local-storage-backed learning progress
 - app/layout/ — learner layout, header, sidebar, and placeholder page
 - styles.css, material-theme.scss, index.html, main.ts, server.ts — global styling and application entry/server files
+
+CSS color Structure
+-------------------
+background - #111315
+primary button-color - #00f2fe / text color - #111315
+secondary button-color - #202327 / text color - #f0f2f4
+primary text-color - #f5f7f8
+secondary text-color - #b3bac4
+unique text color - #00f2fe

@@ -15,9 +15,14 @@ export class LearnerSidebarComponent {
 
   readonly navigationGroups = [
     {
-      title: 'LEARNING',
+      title: '',
       items: [
         { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
+      ]
+    },
+    {
+      title: 'LEARNING',
+      items: [
         { label: 'My Learning', icon: 'school', route: '/my-learning' },
         { label: 'Explore Courses', icon: 'explore', route: '/courses' },
         { label: 'Learning Track', icon: 'route', route: '/learning-track' },
