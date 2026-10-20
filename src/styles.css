@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --lf-primary: #4f46e5;
+  --lf-primary-dark: #4338ca;
+  --lf-primary-light: #eef2ff;
+
+  --lf-text-primary: #0f172a;
+  --lf-text-secondary: #64748b;
+
+  --lf-border: #e2e8f0;
+  --lf-background: #f8fafc;
+  --lf-surface: #ffffff;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--lf-background);
+  color: var(--lf-text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.mat-mdc-nav-list {
+  --mat-list-active-indicator-color: transparent;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background: rgb(15 23 42 / 35%);
+}

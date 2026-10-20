@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "learnforge-learner-app": {
+    "sde-studio-learner-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -24,9 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "styles": ["src/material-theme.scss", "src/styles.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
@@ -64,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "learnforge-learner-app:build:production"
+              "buildTarget": "sde-studio-learner-app:build:production"
             },
             "development": {
-              "buildTarget": "learnforge-learner-app:build:development"
+              "buildTarget": "sde-studio-learner-app:build:development"
             }
           },
           "defaultConfiguration": "development"

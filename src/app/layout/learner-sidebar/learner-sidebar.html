@@ -1,0 +1,46 @@
+<div class="sidebar-content">
+  <a class="brand" routerLink="/dashboard" (click)="navigate.emit()">
+    <span class="brand-icon">
+      <mat-icon>school</mat-icon>
+    </span>
+
+    <span class="brand-copy">
+      <span class="brand-name">SDE STUDIO</span>
+      <span class="brand-subtitle">LEARNER PORTAL</span>
+    </span>
+  </a>
+
+  <div class="navigation-groups">
+    @for (group of navigationGroups; track group.title) {
+      <section class="navigation-group">
+        <p class="group-title">{{ group.title }}</p>
+
+        <mat-nav-list>
+          @for (item of group.items; track item.route) {
+            <a
+              mat-list-item
+              [routerLink]="item.route"
+              routerLinkActive="nav-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="navigate.emit()"
+            >
+              <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+              <span matListItemTitle>{{ item.label }}</span>
+            </a>
+          }
+        </mat-nav-list>
+      </section>
+    }
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="help-icon">
+      <mat-icon>help_outline</mat-icon>
+    </div>
+
+    <div class="help-copy">
+      <span class="help-title">Need help?</span>
+      <span class="help-description">Keep your learning on track.</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,347 @@
+
+@if (course; as selectedCourse) {
+  <main class="course-details-page">
+    <!-- Breadcrumb navigation -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a routerLink="/dashboard">Dashboard</a>
+      <mat-icon>chevron_right</mat-icon>
+      <a routerLink="/courses">Explore Courses</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span aria-current="page">{{ selectedCourse.title }}</span>
+    </nav>
+
+    <!-- Course hero -->
+    <section class="course-hero">
+      <div class="hero-content">
+        <div class="hero-labels">
+          <span class="category-label">{{ selectedCourse.category }}</span>
+
+          <span
+            class="difficulty-label"
+            [class.difficulty-beginner]="selectedCourse.difficulty === 'Beginner'"
+            [class.difficulty-intermediate]="selectedCourse.difficulty === 'Intermediate'"
+            [class.difficulty-advanced]="selectedCourse.difficulty === 'Advanced'"
+          >
+            {{ selectedCourse.difficulty }}
+          </span>
+        </div>
+
+        <h1>{{ selectedCourse.title }}</h1>
+
+        <p class="hero-description">
+          {{ selectedCourse.description }}
+        </p>
+
+        <div class="hero-meta">
+          <span>
+            <mat-icon>star</mat-icon>
+            <strong>{{ selectedCourse.rating }}</strong>
+            <span>Rating</span>
+          </span>
+
+          <span>
+            <mat-icon>play_lesson</mat-icon>
+            {{ totalLessons }} lessons
+          </span>
+
+          <span>
+            <mat-icon>schedule</mat-icon>
+            {{ totalDuration }}
+          </span>
+        </div>
+
+        <div class="hero-instructor">
+          <div class="instructor-avatar">
+            <mat-icon>school</mat-icon>
+          </div>
+          <div>
+            <span class="instructor-caption">Course instructor</span>
+            <strong>{{ selectedCourse.instructor }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-illustration">
+        <div class="illustration-orbit orbit-one"></div>
+        <div class="illustration-orbit orbit-two"></div>
+
+        <div class="illustration-card">
+          <mat-icon>{{ selectedCourse.icon }}</mat-icon>
+          <span>SDE Studio</span>
+          <strong>Learn. Practice. Grow.</strong>
+        </div>
+
+        <div class="floating-icon floating-icon-one">
+          <mat-icon>workspace_premium</mat-icon>
+        </div>
+
+        <div class="floating-icon floating-icon-two">
+          <mat-icon>lightbulb</mat-icon>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course progress -->
+    @if (enrollmentStatus !== 'Not Started') {
+      <section class="progress-overview">
+        <div class="progress-overview-heading">
+          <div>
+            <h2>Your learning progress</h2>
+            <p>Keep going, one lesson at a time.</p>
+          </div>
+
+          <strong>{{ progressPercentage }}%</strong>
+        </div>
+
+        <div
+          class="progress-track"
+          role="progressbar"
+          [attr.aria-valuenow]="progressPercentage"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Course completion progress"
+        >
+          <div
+            class="progress-fill"
+            [style.width.%]="progressPercentage"
+          ></div>
+        </div>
+
+        <p class="progress-footnote">
+          {{ completedLessons }} of {{ totalLessons }} lessons completed
+        </p>
+      </section>
+    }
+
+    <!-- Main content and enrollment panel -->
+    <div class="details-layout">
+      <div class="details-main">
+        <!-- Learning outcomes -->
+        <section class="content-panel">
+          <div class="section-heading">
+            <div class="section-heading-icon">
+              <mat-icon>emoji_events</mat-icon>
+            </div>
+
+            <div>
+              <h2>What you'll learn</h2>
+              <p>Skills and knowledge you'll gain from this course.</p>
+            </div>
+          </div>
+
+          <ul class="outcomes-list">
+            @for (outcome of selectedCourse.learningOutcomes; track outcome) {
+              <li>
+                <mat-icon>check_circle</mat-icon>
+                <span>{{ outcome }}</span>
+              </li>
+            }
+          </ul>
+        </section>
+
+        <!-- Prerequisites -->
+        <section class="content-panel">
+          <div class="section-heading">
+            <div class="section-heading-icon prerequisite-icon">
+              <mat-icon>fact_check</mat-icon>
+            </div>
+
+            <div>
+              <h2>Prerequisites</h2>
+              <p>What you need before getting started.</p>
+            </div>
+          </div>
+
+          <ul class="prerequisites-list">
+            @for (prerequisite of selectedCourse.prerequisites; track prerequisite) {
+              <li>{{ prerequisite }}</li>
+            }
+          </ul>
+        </section>
+
+        <!-- Course curriculum -->
+        <section class="content-panel curriculum-panel">
+          <div class="section-heading">
+            <div class="section-heading-icon curriculum-icon">
+              <mat-icon>list_alt</mat-icon>
+            </div>
+
+            <div>
+              <h2>Course curriculum</h2>
+              <p>
+                {{ totalModuleCount }} modules · {{ totalLessons }} lessons
+              </p>
+            </div>
+          </div>
+
+          <div class="curriculum-list">
+            @for (module of selectedCourse.modules; track module.id) {
+              <article class="module-item">
+                <button
+                  type="button"
+                  class="module-header"
+                  [attr.aria-expanded]="isModuleExpanded(module.id)"
+                  [attr.aria-controls]="'module-content-' + module.id"
+                  (click)="toggleModule(module.id)"
+                >
+                  <div class="module-leading-icon">
+                    <mat-icon>
+                      {{ isModuleExpanded(module.id) ? 'expand_less' : 'expand_more' }}
+                    </mat-icon>
+                  </div>
+
+                  <div class="module-heading-content">
+                    <h3>{{ module.title }}</h3>
+                    <p>{{ module.description }}</p>
+                    <span class="module-lesson-count">
+                      {{ module.lessons.length }}
+                      {{ module.lessons.length === 1 ? 'lesson' : 'lessons' }}
+                    </span>
+                  </div>
+
+                  <mat-icon class="module-chevron">
+                    {{ isModuleExpanded(module.id) ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                  </mat-icon>
+                </button>
+
+                @if (isModuleExpanded(module.id)) {
+                  <div
+                    class="lesson-list"
+                    [id]="'module-content-' + module.id"
+                  >
+                    @for (lesson of module.lessons; track lesson.id) {
+                      <div class="lesson-row">
+                        <div class="lesson-leading-icon">
+                          <mat-icon>
+                            {{ isLessonCompleted(lesson.id) ? 'check_circle' : 'play_circle_outline' }}
+                          </mat-icon>
+                        </div>
+
+                        <div class="lesson-info">
+                          <span class="lesson-title">{{ lesson.title }}</span>
+
+                          <div class="lesson-badges">
+                            @if (isLessonCompleted(lesson.id)) {
+                              <span class="completed-lesson-label">Completed</span>
+                            }
+
+                            @if (lesson.preview) {
+                              <span class="preview-label">Preview</span>
+                            }
+                          </div>
+                        </div>
+
+                        <span class="lesson-duration">
+                          {{ lesson.duration }}
+                        </span>
+
+                        <button
+                          type="button"
+                          class="lesson-open-button"
+                          [attr.aria-label]="'Open lesson: ' + lesson.title"
+                          (click)="openLesson(lesson)"
+                        >
+                          <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                      </div>
+                    }
+                  </div>
+                }
+              </article>
+            }
+          </div>
+        </section>
+      </div>
+
+      <!-- Enrollment card -->
+      <aside class="enrollment-panel">
+        <div class="enrollment-card">
+          <div class="enrollment-card-icon">
+            <mat-icon>
+              {{ enrollmentStatus === 'Completed' ? 'workspace_premium' : enrollmentStatus === 'In Progress' ? 'play_circle' : 'school' }}
+            </mat-icon>
+          </div>
+
+          <h2>
+            {{
+              enrollmentStatus === 'Completed'
+                ? 'Course completed!'
+                : enrollmentStatus === 'In Progress'
+                  ? 'Welcome back!'
+                  : 'Ready to start learning?'
+            }}
+          </h2>
+
+          <p>
+            {{
+              enrollmentStatus === 'Completed'
+                ? 'Review the lessons whenever you need a refresher.'
+                : enrollmentStatus === 'In Progress'
+                  ? 'Pick up where you left off and keep building your skills.'
+                  : 'Enroll to begin your learning journey with this course.'
+            }}
+          </p>
+
+          <div class="enrollment-facts">
+            <div>
+              <mat-icon>schedule</mat-icon>
+              <span>Duration</span>
+              <strong>{{ selectedCourse.duration }}</strong>
+            </div>
+
+            <div>
+              <mat-icon>menu_book</mat-icon>
+              <span>Lessons</span>
+              <strong>{{ totalLessons }}</strong>
+            </div>
+
+            <div>
+              <mat-icon>groups</mat-icon>
+              <span>Learners</span>
+              <strong>{{ selectedCourse.enrolledCount | number }}</strong>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="enrollment-button"
+            (click)="enrollOrContinue()"
+          >
+            {{ getActionLabel() }}
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+
+          <div class="enrollment-note">
+            <mat-icon>verified_user</mat-icon>
+            <span>Learn at your own pace</span>
+          </div>
+        </div>
+
+        <div class="help-card">
+          <mat-icon>support_agent</mat-icon>
+          <div>
+            <h3>Need help?</h3>
+            <p>Review the course prerequisites before you begin.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+} @else {
+  <main class="course-not-found">
+    <div class="not-found-icon">
+      <mat-icon>menu_book</mat-icon>
+    </div>
+
+    <h1>Course not found</h1>
+    <p>
+      This course may be unavailable or the link may be incorrect.
+      Return to the catalog to explore available courses.
+    </p>
+
+    <a routerLink="/courses" class="back-to-courses">
+      <mat-icon>arrow_back</mat-icon>
+      Back to courses
+    </a>
+  </main>
+}

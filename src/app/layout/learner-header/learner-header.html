@@ -1,0 +1,47 @@
+<mat-toolbar class="learner-toolbar">
+  <button
+    mat-icon-button
+    class="menu-button"
+    aria-label="Toggle navigation menu"
+    (click)="menuToggle.emit()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="toolbar-heading">
+    <span class="toolbar-title">My Learning Space</span>
+    <span class="toolbar-subtitle">Learn something new today.</span>
+  </div>
+
+  <div class="toolbar-actions">
+    <button
+      mat-icon-button
+      class="toolbar-icon-button"
+      aria-label="Search courses"
+      title="Search courses"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="toolbar-icon-button notification-button"
+      aria-label="Notifications"
+      title="Notifications"
+    >
+      <mat-icon>notifications_none</mat-icon>
+      <span class="notification-dot"></span>
+    </button>
+
+    <div class="toolbar-divider"></div>
+
+    <button class="learner-profile" aria-label="Learner profile">
+      <span class="avatar">K</span>
+      <span class="profile-copy">
+        <span class="profile-name">Learner</span>
+        <span class="profile-role">Student</span>
+      </span>
+      <mat-icon class="profile-chevron">expand_more</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,299 @@
+
+@if (course && currentLesson) {
+  <main class="lesson-workspace">
+    <nav class="lesson-breadcrumbs" aria-label="Breadcrumb">
+      <a routerLink="/dashboard">Dashboard</a>
+      <mat-icon>chevron_right</mat-icon>
+      <a [routerLink]="['/courses', courseId]">{{ course.title }}</a>
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ currentLesson.title }}</span>
+    </nav>
+
+    <header class="workspace-header">
+      <div class="workspace-header-copy">
+        <span class="workspace-eyebrow">SDE Studio LEARNING SPACE</span>
+        <h1>{{ course.title }}</h1>
+        <p>Learn at your own pace, one lesson at a time.</p>
+      </div>
+
+      <a class="back-course-link" [routerLink]="['/courses', courseId]">
+        <mat-icon>arrow_back</mat-icon>
+        Course overview
+      </a>
+    </header>
+
+    <section class="learning-progress-card">
+      <div class="progress-heading">
+        <div>
+          <span class="progress-label">YOUR COURSE PROGRESS</span>
+          <p>
+            {{ completedLessons() }} of {{ totalLessons }} lessons completed
+          </p>
+        </div>
+        <strong>{{ progressPercentage() }}%</strong>
+      </div>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        [attr.aria-valuenow]="progressPercentage()"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-label="Course completion">
+        <div class="progress-fill" [style.width.%]="progressPercentage()"></div>
+      </div>
+    </section>
+
+    <div class="workspace-layout">
+      <section class="lesson-main">
+        <div class="lesson-heading-card">
+          <div class="lesson-heading-top">
+            <span class="module-label">{{ currentModuleTitle }}</span>
+            <span class="lesson-position">{{ lessonPositionLabel }}</span>
+          </div>
+
+          <h2>{{ currentLesson.title }}</h2>
+
+          <div class="lesson-meta">
+            <span>
+              <mat-icon>schedule</mat-icon>
+              {{ currentLesson.duration }}
+            </span>
+
+            @if (isCurrentLessonCompleted()) {
+              <span class="completion-badge">
+                <mat-icon>check_circle</mat-icon>
+                Completed
+              </span>
+            } @else {
+              <span class="in-progress-badge">
+                <mat-icon>play_circle</mat-icon>
+                In progress
+              </span>
+            }
+          </div>
+        </div>
+
+        <article class="lesson-content-card">
+          <div class="lesson-content-icon">
+            <mat-icon>menu_book</mat-icon>
+          </div>
+
+          <span class="content-eyebrow">LESSON MATERIAL</span>
+          <h3>{{ currentLesson.title }}</h3>
+
+          <p class="lesson-introduction">
+            You're learning {{ currentLesson.title.toLowerCase() }} as part of
+            {{ currentModuleTitle }} in {{ course.title }}.
+          </p>
+
+          <div class="content-section">
+            <h4>
+              <mat-icon>flag</mat-icon>
+              Learning objective
+            </h4>
+            <p>
+              Understand the main concepts behind
+              {{ currentLesson.title.toLowerCase() }}, why they matter, and
+              how they fit into the broader subject of {{ course.title }}.
+            </p>
+          </div>
+
+          <div class="content-section">
+            <h4>
+              <mat-icon>lightbulb</mat-icon>
+              What to focus on
+            </h4>
+            <p>{{ course.description }}</p>
+            <p>
+              Work through the topic carefully, identify its key terms, and
+              connect the concepts to the lessons you've already studied.
+            </p>
+          </div>
+
+          <div class="lesson-study-tip">
+            <mat-icon>tips_and_updates</mat-icon>
+            <div>
+              <strong>Study tip</strong>
+              <p>
+                Write down the main idea in your own words. If the topic
+                includes a practical concept, try applying it before moving
+                to the next lesson.
+              </p>
+            </div>
+          </div>
+
+          <div class="lesson-completion-action">
+            @if (isCurrentLessonCompleted()) {
+              <div class="completion-message">
+                <mat-icon>check_circle</mat-icon>
+                You've completed this lesson.
+              </div>
+
+              <button
+                type="button"
+                class="secondary-action"
+                (click)="markCurrentLessonIncomplete()">
+                Mark as incomplete
+              </button>
+            } @else {
+              <button
+                type="button"
+                class="complete-lesson-button"
+                (click)="markCurrentLessonComplete()">
+                <mat-icon>check_circle</mat-icon>
+                Mark as complete
+              </button>
+            }
+          </div>
+        </article>
+
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+          <button
+            type="button"
+            class="previous-lesson-button"
+            [disabled]="!previousLesson"
+            (click)="goToPreviousLesson()">
+            <mat-icon>arrow_back</mat-icon>
+            <span>
+              <small>PREVIOUS LESSON</small>
+              <strong>
+                {{ previousLesson?.title ?? 'This is the first lesson' }}
+              </strong>
+            </span>
+          </button>
+
+          @if (nextLesson) {
+            <button
+              type="button"
+              class="next-lesson-button"
+              (click)="goToNextLesson()">
+              <span>
+                <small>NEXT LESSON</small>
+                <strong>{{ nextLesson.title }}</strong>
+              </span>
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          } @else {
+            <button
+              type="button"
+              class="next-lesson-button"
+              (click)="continueLearning()">
+              <span>
+                <small>COURSE STATUS</small>
+                <strong>
+                  {{ progressPercentage() === 100
+                    ? 'Review course'
+                    : 'Find next lesson' }}
+                </strong>
+              </span>
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          }
+        </nav>
+      </section>
+
+      <aside class="curriculum-sidebar">
+        <div class="curriculum-card">
+          <div class="curriculum-header">
+            <div>
+              <span class="curriculum-eyebrow">YOUR LEARNING PATH</span>
+              <h2>Course content</h2>
+            </div>
+            <mat-icon>list_alt</mat-icon>
+          </div>
+
+          <p class="curriculum-summary">
+            {{ courseModules.length }} modules · {{ totalLessons }} lessons
+          </p>
+
+          <div class="curriculum-modules">
+            @for (module of courseModules; track module.id) {
+              <section class="curriculum-module">
+                <div class="module-title-row">
+                  <div>
+                    <h3>{{ module.title }}</h3>
+                    <p>
+                      {{ getModuleCompletedCount(module.id) }} of
+                      {{ getModuleLessonCount(module.id) }} completed
+                    </p>
+                  </div>
+
+                  @if (
+                    getModuleCompletedCount(module.id) ===
+                    getModuleLessonCount(module.id)
+                  ) {
+                    <mat-icon class="module-complete-icon">
+                      check_circle
+                    </mat-icon>
+                  }
+                </div>
+
+                <div class="module-progress-track">
+                  <div
+                    class="module-progress-fill"
+                    [style.width.%]="getModuleLessonCount(module.id) > 0
+                      ? getModuleCompletedCount(module.id) /
+                        getModuleLessonCount(module.id) * 100
+                      : 0">
+                  </div>
+                </div>
+
+                <div class="curriculum-lessons">
+                  @for (lesson of lessons; track lesson.id) {
+                    @if (lesson.moduleId === module.id) {
+                      <button
+                        type="button"
+                        class="curriculum-lesson"
+                        [class.active-lesson]="lesson.id === currentLesson.id"
+                        [class.completed-lesson]="isLessonCompleted(lesson.id)"
+                        [attr.aria-current]="lesson.id === currentLesson.id
+                          ? 'step'
+                          : null"
+                        (click)="navigateToLesson(lesson.id)">
+                        <mat-icon>
+                          {{ isLessonCompleted(lesson.id)
+                            ? 'check_circle'
+                            : lesson.id === currentLesson.id
+                              ? 'play_circle'
+                              : 'play_circle_outline' }}
+                        </mat-icon>
+
+                        <span>{{ lesson.title }}</span>
+
+                        <small>{{ lesson.duration }}</small>
+                      </button>
+                    }
+                  }
+                </div>
+              </section>
+            }
+          </div>
+        </div>
+
+        <div class="workspace-help-card">
+          <mat-icon>school</mat-icon>
+          <div>
+            <strong>Keep learning</strong>
+            <p>Complete lessons to update your course progress.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+} @else {
+  <main class="lesson-not-found">
+    <div class="not-found-icon">
+      <mat-icon>menu_book</mat-icon>
+    </div>
+    <h1>Lesson unavailable</h1>
+    <p>
+      We couldn't find this course or lesson. Return to the catalog and
+      select a course to continue.
+    </p>
+    <a routerLink="/courses" class="back-to-catalog">
+      <mat-icon>arrow_back</mat-icon>
+      Explore courses
+    </a>
+  </main>
+}

@@ -30,6 +30,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
+/.angular
 /.angular/cache
 .sass-cache/
 /connect.lock
@@ -38,6 +39,9 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
+.env
+.env.*
+!.env.example
 
 # System files
 .DS_Store

@@ -1,0 +1,81 @@
+<div class="landing-page">
+  <header class="landing-nav">
+    <a class="landing-brand" routerLink="/" aria-label="TheSDEStudio home">
+      <span class="landing-brand-mark"><mat-icon>terminal</mat-icon></span>
+      <span>TheSDE<span>Studio</span></span>
+    </a>
+    <nav class="landing-nav-links" aria-label="Main navigation">
+      <a href="#learning-paths">Learning paths</a>
+      <a href="#how-it-works">How it works</a>
+    </nav>
+    <div class="landing-nav-actions">
+      <a class="landing-login" routerLink="/dashboard">Open workspace <mat-icon>arrow_outward</mat-icon></a>
+      <a class="landing-nav-cta" routerLink="/courses">Explore courses</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="landing-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="landing-hero-copy">
+        <h1>Don't just learn to code.<br /><span>Learn to engineer.</span></h1>
+        <p class="landing-hero-description">A hands-on learning studio for developers who want to master engineering fundamentals, solve real problems, and build the skills behind great software careers—from Java and DSA to backend engineering and system design.</p>
+        <div class="landing-hero-actions">
+          <a class="landing-primary-button" routerLink="/courses">Start learning <mat-icon>arrow_forward</mat-icon></a>
+          <a class="landing-secondary-button" routerLink="/dashboard"><mat-icon>play_circle</mat-icon> View my workspace</a>
+        </div>
+        <div class="landing-proof-row">
+          <div class="proof-avatars" aria-hidden="true"><span>J</span><span>D</span><span>S</span><span>+</span></div>
+          <p><strong>Learn at your own pace</strong><br />A personal workspace that remembers your progress</p>
+        </div>
+      </div>
+      <div class="landing-hero-visual" aria-label="Preview of the TheSDEStudio learning dashboard">
+        <div class="visual-orbit orbit-a"></div><div class="visual-orbit orbit-b"></div>
+        <div class="visual-card dashboard-preview">
+          <div class="preview-topbar"><div class="preview-brand"><span class="mini-mark"><mat-icon>terminal</mat-icon></span><strong>Learning overview</strong></div><span class="preview-live"><i></i> YOUR SPACE</span></div>
+          <div class="preview-welcome"><div><span class="preview-eyebrow">TUESDAY · YOUR NEXT CHAPTER</span><h3>Small steps add up.</h3><p>Keep your learning streak moving.</p></div><div class="preview-spark"><mat-icon>auto_awesome</mat-icon></div></div>
+          <div class="preview-metrics"><div><span class="metric-icon violet"><mat-icon>menu_book</mat-icon></span><strong>06</strong><small>Learning paths</small></div><div><span class="metric-icon mint"><mat-icon>task_alt</mat-icon></span><strong>Progress</strong><small>Tracked as you learn</small></div></div>
+          <div class="preview-course-heading"><strong>Pick up where you left off</strong><a routerLink="/my-learning">View all</a></div>
+          <div class="preview-course"><span class="preview-course-icon java"><mat-icon>code</mat-icon></span><div class="preview-course-copy"><strong>Java Fundamentals</strong><small>Core concepts · Lesson-based</small><div class="preview-progress"><span style="width:64%"></span></div></div><span class="preview-percent">64%</span></div>
+          <div class="preview-course"><span class="preview-course-icon dsa"><mat-icon>account_tree</mat-icon></span><div class="preview-course-copy"><strong>Data Structures</strong><small>Patterns · Problem solving</small><div class="preview-progress"><span style="width:38%"></span></div></div><span class="preview-percent">38%</span></div>
+          <div class="preview-bottom-note"><mat-icon>check_circle</mat-icon><span>Your lessons, notes, and bookmarks in one place</span></div>
+        </div>
+        <div class="floating-note note-top"><span class="floating-note-icon"><mat-icon>track_changes</mat-icon></span><span><strong>Stay on track</strong><small>One lesson at a time</small></span></div>
+        <div class="floating-note note-bottom"><span class="floating-note-icon mint-icon"><mat-icon>bookmark_added</mat-icon></span><span><strong>Keep what matters</strong><small>Notes and saved lessons</small></span></div>
+      </div>
+      <div class="hero-bottom-fade" aria-hidden="true"></div>
+    </section>
+
+    <section class="landing-value-strip" aria-label="Platform benefits">
+      <div><mat-icon>route</mat-icon><span><strong>Structured paths</strong><small>Know what to learn next</small></span></div>
+      <div><mat-icon>insights</mat-icon><span><strong>Visible progress</strong><small>See how far you've come</small></span></div>
+      <div><mat-icon>edit_note</mat-icon><span><strong>Your study space</strong><small>Notes and bookmarks together</small></span></div>
+      <div><mat-icon>devices</mat-icon><span><strong>Learn your way</strong><small>Designed for focused sessions</small></span></div>
+    </section>
+
+    <section class="landing-section paths-section" id="learning-paths">
+      <div class="section-intro"><div><span class="section-overline">YOUR NEXT SKILL</span><h2>Build a stronger<br /><span>engineering foundation.</span></h2></div><p>Skip the scattered tabs. Explore focused tracks designed to help you understand the concepts, practice deliberately, and connect the dots.</p></div>
+      <div class="landing-feature-grid">
+        @for (feature of features; track feature.number) {
+          <a [class]="'landing-feature-card tone-' + feature.tone" [routerLink]="feature.route">
+            <div class="feature-card-top"><span class="feature-icon"><mat-icon>{{ feature.icon }}</mat-icon></span><span class="feature-number">{{ feature.number }}</span></div>
+            <h3>{{ feature.title }}</h3><p>{{ feature.description }}</p>
+            <div class="feature-tags">@for (tag of feature.tags; track tag) { <span>{{ tag }}</span> }</div>
+            <div class="feature-card-link">Explore track <mat-icon>arrow_forward</mat-icon></div>
+          </a>
+        }
+      </div>
+      <div class="all-paths-row"><p>Prefer to browse first? Explore all available courses and choose where to begin.</p><a routerLink="/courses">Browse the course library <mat-icon>arrow_forward</mat-icon></a></div>
+    </section>
+
+    <section class="landing-how-section" id="how-it-works">
+      <div class="how-intro"><span class="section-overline">A SIMPLE SYSTEM</span><h2>Make progress feel<br /><span>manageable.</span></h2><p>Good learning is less about doing everything today and more about knowing what to do next.</p><a class="landing-primary-button" routerLink="/dashboard">Go to my dashboard <mat-icon>arrow_forward</mat-icon></a></div>
+      <div class="how-steps">@for (step of steps; track step.number) { <article class="how-step"><span class="step-number">{{ step.number }}</span><div><h3>{{ step.title }}</h3><p>{{ step.description }}</p></div><mat-icon>north_east</mat-icon></article> }</div>
+      <div class="how-decoration" aria-hidden="true"><span></span><span></span><span></span></div>
+    </section>
+
+    <section class="landing-cta"><div class="cta-mark"><mat-icon>auto_awesome</mat-icon></div><div><span class="section-overline">YOUR NEXT CHAPTER STARTS HERE</span><h2>Turn curiosity into capability.</h2><p>Choose a topic, open your first lesson, and let TheSDEStudio help you keep the momentum.</p></div><a class="landing-primary-button" routerLink="/courses">Find your first lesson <mat-icon>arrow_forward</mat-icon></a></section>
+  </main>
+
+  <footer class="landing-footer"><a class="landing-brand" routerLink="/"><span class="landing-brand-mark"><mat-icon>terminal</mat-icon></span><span>TheSDE<span>Studio</span></span></a><p>Learn. Build. Practice. Grow.</p><div><a routerLink="/courses">Courses</a><a routerLink="/dashboard">Workspace</a><a routerLink="/settings">Preferences</a></div><small>© {{ 2026 }} TheSDEStudio. Where Code Meets Career.</small></footer>
+</div>

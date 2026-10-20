@@ -1,0 +1,23 @@
+<mat-sidenav-container class="learner-shell">
+  <mat-sidenav
+    class="learner-sidenav"
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile || mobileMenuOpen"
+    [disableClose]="!isMobile"
+    (closedStart)="closeMobileMenu()"
+  >
+    <app-learner-sidebar
+      (navigate)="closeMobileMenu()"
+    />
+  </mat-sidenav>
+
+  <mat-sidenav-content class="learner-main">
+    <app-learner-header
+      (menuToggle)="toggleMenu()"
+    />
+
+    <main class="page-content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

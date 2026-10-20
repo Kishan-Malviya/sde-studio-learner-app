@@ -1,0 +1,225 @@
+
+<section class="catalog-page">
+  <header class="catalog-heading">
+    <div>
+      <p class="eyebrow">YOUR LEARNING JOURNEY</p>
+      <h1>Explore Courses</h1>
+      <p class="page-description">
+        Discover new skills, continue learning, and make progress toward your goals.
+      </p>
+    </div>
+
+    <div class="catalog-heading-icon">
+      <mat-icon>school</mat-icon>
+    </div>
+  </header>
+
+  <section class="catalog-stats" aria-label="Course statistics">
+    <article class="stat-card">
+      <div class="stat-icon total-icon">
+        <mat-icon>menu_book</mat-icon>
+      </div>
+      <div>
+        <p>Available Courses</p>
+        <h2>{{ totalCourses }}</h2>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon progress-icon">
+        <mat-icon>pending_actions</mat-icon>
+      </div>
+      <div>
+        <p>In Progress</p>
+        <h2>{{ inProgressCount }}</h2>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon completed-icon">
+        <mat-icon>task_alt</mat-icon>
+      </div>
+      <div>
+        <p>Completed</p>
+        <h2>{{ completedCount }}</h2>
+      </div>
+    </article>
+  </section>
+
+  <section class="catalog-toolbar">
+    <div class="search-box">
+      <mat-icon>search</mat-icon>
+      <input
+        type="search"
+        placeholder="Search courses, topics, or instructors..."
+        aria-label="Search courses"
+        [(ngModel)]="searchTerm"
+      />
+      @if (searchTerm) {
+        <button
+          type="button"
+          class="clear-search"
+          aria-label="Clear search"
+          (click)="searchTerm = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </div>
+
+    <div class="filter-controls">
+      <select
+        aria-label="Filter by category"
+        [(ngModel)]="selectedCategory"
+      >
+        @for (category of categories; track category) {
+          <option [value]="category">{{ category }}</option>
+        }
+      </select>
+
+      <select
+        aria-label="Filter by difficulty"
+        [(ngModel)]="selectedDifficulty"
+      >
+        @for (difficulty of difficulties; track difficulty) {
+          <option [value]="difficulty">{{ difficulty }}</option>
+        }
+      </select>
+
+      <select
+        aria-label="Filter by learning status"
+        [(ngModel)]="selectedStatus"
+      >
+        @for (status of statuses; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+
+      <select aria-label="Sort courses" [(ngModel)]="sortBy">
+        <option value="popular">Most popular</option>
+        <option value="newest">Recently updated</option>
+        <option value="title">Course title</option>
+      </select>
+    </div>
+  </section>
+
+  <div class="results-heading">
+    <div>
+      <h2>All Courses</h2>
+      <p>
+        Showing {{ filteredCourses.length }}
+        {{ filteredCourses.length === 1 ? 'course' : 'courses' }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="reset-button"
+      (click)="resetFilters()"
+    >
+      <mat-icon>restart_alt</mat-icon>
+      Reset filters
+    </button>
+  </div>
+
+  @if (filteredCourses.length > 0) {
+    <section class="course-grid" aria-label="Course catalog">
+      @for (course of filteredCourses; track course.id) {
+        <article class="course-card">
+          <div class="course-card-top">
+            <div class="course-icon">
+              <mat-icon>{{ course.icon }}</mat-icon>
+            </div>
+
+            <span
+              class="status-badge"
+              [class.status-progress]="course.status === 'In Progress'"
+              [class.status-completed]="course.status === 'Completed'"
+              [class.status-new]="course.status === 'Not Started'"
+            >
+              {{ course.status }}
+            </span>
+          </div>
+
+          <div class="course-content">
+            <div class="course-meta">
+              <span>{{ course.category }}</span>
+              <span class="meta-separator">•</span>
+              <span>{{ course.difficulty }}</span>
+            </div>
+
+            <h3>{{ course.title }}</h3>
+            <p class="course-description">{{ course.description }}</p>
+
+            <div class="course-facts">
+              <span>
+                <mat-icon>schedule</mat-icon>
+                {{ course.duration }}
+              </span>
+              <span>
+                <mat-icon>play_lesson</mat-icon>
+                {{ course.lessons }} lessons
+              </span>
+            </div>
+
+            <div class="course-rating">
+              <mat-icon>star</mat-icon>
+              <strong>{{ course.rating }}</strong>
+              <span>({{ course.enrolledCount | number }} learners)</span>
+            </div>
+
+            @if (course.status !== 'Not Started') {
+              <div class="course-progress">
+                <div class="progress-label">
+                  <span>Course progress</span>
+                  <strong>{{ course.progress }}%</strong>
+                </div>
+                <div
+                  class="progress-track"
+                  role="progressbar"
+                  [attr.aria-valuenow]="course.progress"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [attr.aria-label]="course.title + ' progress'"
+                >
+                  <div
+                    class="progress-fill"
+                    [style.width.%]="course.progress"
+                  ></div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <footer class="course-card-footer">
+            <span class="instructor">{{ course.instructor }}</span>
+
+            <a
+              class="course-action"
+              [routerLink]="['/courses', course.id]"
+              [attr.aria-label]="'Open ' + course.title"
+            >
+              {{ course.status === 'Not Started' ? 'View course' : course.status === 'Completed' ? 'Review course' : 'Continue' }}
+              <mat-icon>arrow_forward</mat-icon>
+            </a>
+          </footer>
+        </article>
+      }
+    </section>
+  } @else {
+    <section class="empty-state">
+      <div class="empty-icon">
+        <mat-icon>search_off</mat-icon>
+      </div>
+      <h3>No courses found</h3>
+      <p>Try a different search term or adjust your filters.</p>
+      <button
+        type="button"
+        class="primary-button"
+        (click)="resetFilters()"
+      >
+        Clear filters
+      </button>
+    </section>
+  }
+</section>

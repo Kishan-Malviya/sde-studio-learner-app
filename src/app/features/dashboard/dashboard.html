@@ -1,0 +1,217 @@
+<div class="dashboard-page">
+  <!-- Page heading -->
+  <section class="welcome-section">
+    <div>
+      <p class="welcome-eyebrow">YOUR LEARNING JOURNEY</p>
+      <h1>Welcome back, Learner! <span>👋</span></h1>
+      <p class="welcome-description">
+        Keep up the momentum. Every lesson brings you closer to your goals.
+      </p>
+    </div>
+
+    <a mat-flat-button class="explore-button" routerLink="/courses">
+      <mat-icon>explore</mat-icon>
+      Explore courses
+    </a>
+  </section>
+
+  <!-- Statistics -->
+  <section class="stats-grid" aria-label="Learning statistics">
+    @for (stat of stats; track stat.label) {
+      <article class="stat-card">
+        <div
+          class="stat-icon"
+          [style.background]="stat.background"
+          [style.color]="stat.color"
+        >
+          <mat-icon>{{ stat.icon }}</mat-icon>
+        </div>
+
+        <div class="stat-content">
+          <p class="stat-label">{{ stat.label }}</p>
+          <h2>{{ stat.value }}</h2>
+          <p class="stat-caption">{{ stat.caption }}</p>
+        </div>
+      </article>
+    }
+  </section>
+
+  <!-- Main dashboard grid -->
+  <div class="dashboard-grid">
+    <div class="dashboard-primary">
+      <!-- Continue learning -->
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <div>
+            <h2>Continue learning</h2>
+            <p>Pick up right where you left off.</p>
+          </div>
+
+          <a routerLink="/my-learning" class="text-link">
+            View all
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </div>
+
+        <div class="course-list">
+          @for (course of courses; track trackCourse($index, course)) {
+            <article class="course-card">
+              <div class="course-main">
+                <div
+                  class="course-icon"
+                  [style.background]="course.iconBackground"
+                  [style.color]="course.iconColor"
+                >
+                  <mat-icon>{{ course.icon }}</mat-icon>
+                </div>
+
+                <div class="course-info">
+                  <p class="course-category">{{ course.category }}</p>
+                  <h3>{{ course.title }}</h3>
+                  <p class="course-instructor">{{ course.instructor }}</p>
+                </div>
+
+                <span class="progress-badge">{{ course.progress }}%</span>
+              </div>
+
+              <div class="course-progress">
+                <div class="progress-labels">
+                  <span>{{ course.completedLessons }} of
+                    {{ course.totalLessons }} lessons</span>
+                  <span>{{ course.progress }}% complete</span>
+                </div>
+
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="course.progress"
+                  aria-label="Course completion"
+                />
+              </div>
+
+              <div class="course-footer">
+                <div class="current-lesson">
+                  <mat-icon>play_circle_outline</mat-icon>
+                  <div>
+                    <span class="lesson-label">UP NEXT</span>
+                    <span class="lesson-title">{{ course.currentLesson }}</span>
+                  </div>
+                </div>
+
+                <a
+                  mat-flat-button
+                  class="resume-button"
+                  [routerLink]="['/courses', course.id]"
+                >
+                  Resume
+                  <mat-icon>arrow_forward</mat-icon>
+                </a>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
+      <!-- Recent activity -->
+      <section class="dashboard-section activity-section">
+        <div class="section-heading">
+          <div>
+            <h2>Recent activity</h2>
+            <p>Your latest learning milestones.</p>
+          </div>
+        </div>
+
+        <div class="activity-list">
+          @for (activity of activities; track activity.title) {
+            <article class="activity-item">
+              <div
+                class="activity-icon"
+                [class.activity-completed]="activity.completed"
+              >
+                <mat-icon>{{ activity.icon }}</mat-icon>
+              </div>
+
+              <div class="activity-content">
+                <h3>{{ activity.title }}</h3>
+                <p>{{ activity.course }}</p>
+              </div>
+
+              <span class="activity-time">{{ activity.time }}</span>
+            </article>
+          }
+        </div>
+      </section>
+    </div>
+
+    <aside class="dashboard-secondary">
+      <!-- Weekly goal -->
+      <section class="side-card weekly-goal-card">
+        <div class="side-card-heading">
+          <div class="side-card-icon goal-icon">
+            <mat-icon>track_changes</mat-icon>
+          </div>
+          <span class="goal-status">IN PROGRESS</span>
+        </div>
+
+        <h2>Weekly learning goal</h2>
+        <p class="side-card-description">
+          Small steps every day lead to big achievements.
+        </p>
+
+        <div class="goal-hours">
+          <strong>{{ weeklyGoal.completedHours }}</strong>
+          <span>/ {{ weeklyGoal.targetHours }} hours</span>
+        </div>
+
+        <mat-progress-bar
+          mode="determinate"
+          [value]="weeklyGoalProgress"
+          aria-label="Weekly learning goal progress"
+        />
+
+        <div class="goal-footer">
+          <span>{{ weeklyGoalProgress | number: '1.0-0' }}% completed</span>
+          <span>
+            {{ weeklyGoal.targetHours - weeklyGoal.completedHours }}h to go
+          </span>
+        </div>
+      </section>
+
+      <!-- Learning tip -->
+      <section class="side-card tip-card">
+        <div class="tip-icon">
+          <mat-icon>lightbulb</mat-icon>
+        </div>
+
+        <p class="tip-eyebrow">LEARNING TIP</p>
+        <h2>Consistency beats intensity.</h2>
+        <p class="side-card-description">
+          Try a focused 25-minute study session today. Regular practice helps
+          you retain more of what you learn.
+        </p>
+      </section>
+
+      <!-- Quick links -->
+      <section class="side-card quick-links-card">
+        <h2>Quick access</h2>
+
+        <a routerLink="/notes" class="quick-link">
+          <mat-icon>edit_note</mat-icon>
+          <span>My notes</span>
+          <mat-icon class="quick-link-arrow">chevron_right</mat-icon>
+        </a>
+
+        <a routerLink="/bookmarks" class="quick-link">
+          <mat-icon>bookmarks</mat-icon>
+          <span>Saved lessons</span>
+          <mat-icon class="quick-link-arrow">chevron_right</mat-icon>
+        </a>
+
+        <a routerLink="/learning-track" class="quick-link">
+          <mat-icon>route</mat-icon>
+          <span>Learning track</span>
+          <mat-icon class="quick-link-arrow">chevron_right</mat-icon>
+        </a>
+      </section>
+    </aside>
+  </div>
+</div>
