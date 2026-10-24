@@ -110,36 +110,6 @@
           }
         </div>
       </section>
-
-      <!-- Recent activity -->
-      <section class="dashboard-section activity-section">
-        <div class="section-heading">
-          <div>
-            <h2>Recent activity</h2>
-            <p>Your latest learning milestones.</p>
-          </div>
-        </div>
-
-        <div class="activity-list">
-          @for (activity of activities; track activity.title) {
-            <article class="activity-item">
-              <div
-                class="activity-icon"
-                [class.activity-completed]="activity.completed"
-              >
-                <mat-icon>{{ activity.icon }}</mat-icon>
-              </div>
-
-              <div class="activity-content">
-                <h3>{{ activity.title }}</h3>
-                <p>{{ activity.course }}</p>
-              </div>
-
-              <span class="activity-time">{{ activity.time }}</span>
-            </article>
-          }
-        </div>
-      </section>
     </div>
 
     <aside class="dashboard-secondary">
@@ -188,29 +158,6 @@
           Try a focused 25-minute study session today. Regular practice helps
           you retain more of what you learn.
         </p>
-      </section>
-
-      <!-- Quick links -->
-      <section class="side-card quick-links-card">
-        <h2>Quick access</h2>
-
-        <a routerLink="/notes" class="quick-link">
-          <mat-icon>edit_note</mat-icon>
-          <span>My notes</span>
-          <mat-icon class="quick-link-arrow">chevron_right</mat-icon>
-        </a>
-
-        <a routerLink="/bookmarks" class="quick-link">
-          <mat-icon>bookmarks</mat-icon>
-          <span>Saved lessons</span>
-          <mat-icon class="quick-link-arrow">chevron_right</mat-icon>
-        </a>
-
-        <a routerLink="/learning-track" class="quick-link">
-          <mat-icon>route</mat-icon>
-          <span>Learning track</span>
-          <mat-icon class="quick-link-arrow">chevron_right</mat-icon>
-        </a>
       </section>
     </aside>
   </div>

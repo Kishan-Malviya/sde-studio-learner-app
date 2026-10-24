@@ -57,7 +57,7 @@
 
 .landing-brand-mark {
     background: #00f2fe;
-    color: #111315;
+    color: #0a0a0a;
     box-shadow: 0 0 24px #00f2fe22;
 }
 
@@ -94,20 +94,20 @@
   color: #f0f2f4;
 }
 
+.navigation-group a[mat-list-item].nav-active mat-icon {
+  color: #0a0a0a;
+}
+
 .navigation-group a[mat-list-item].nav-active {
   background: #00f2fe;
-  color: #111315;
+  color: #0a0a0a;
   font-weight: 600;
 }
 
-.navigation-group a[mat-list-item].nav-active mat-icon {
-  color: #111315;
+.navigation-group a[mat-list-item].nav-active span {
+  color: #0a0a0a;
 }
 
-.mdc-list-item__primary-text {
-  color: #f0f2f4;
-}
-
-.mdc-list-item:hover .mdc-list-item__primary-text {
+.navigation-group a[mat-list-item] span {
   color: #f0f2f4;
 }

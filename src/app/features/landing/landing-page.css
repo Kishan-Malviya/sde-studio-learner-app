@@ -1340,17 +1340,17 @@
 
 /* TheSDEStudio public brand skin: premium charcoal studio with cyan highlights. */
 :host {
-    background: #111315;
+    background: #0a0a0a;
     color: #e5e5e5;
 }
 
 .landing-page {
-    background: #111315;
+    background: #0a0a0a;
     color: #e5e5e5;
 }
 
 .landing-nav {
-    background: #111315;
+    background: #0a0a0a;
 }
 
 .landing-brand {
@@ -1363,7 +1363,7 @@
 
 .landing-brand-mark {
     background: #00f2fe;
-    color: #111315;
+    color: #0a0a0a;
     box-shadow: 0 0 24px #00f2fe22;
 }
 
@@ -1384,18 +1384,18 @@
 .landing-nav-cta,
 .landing-primary-button {
     background: #00f2fe;
-    color: #111315;
+    color: #0a0a0a;
     box-shadow: 0 8px 24px #00f2fe1c;
 }
 
 .landing-nav-cta:hover,
 .landing-primary-button:hover {
     background: #73f8ff;
-    color: #111315;
+    color: #0a0a0a;
 }
 
 .landing-hero {
-    background: radial-gradient(ellipse at 78% 35%, #173236 0, #111315 48%);
+    background: radial-gradient(ellipse at 78% 35%, #173236 0, #0a0a0a 48%);
 }
 
 .hero-grid-pattern {
@@ -1428,7 +1428,7 @@
 }
 
 .proof-avatars span {
-    border-color: #111315;
+    border-color: #0a0a0a;
 }
 
 .landing-secondary-button {
@@ -1526,7 +1526,7 @@
 }
 
 .hero-bottom-fade {
-    background: linear-gradient(180deg, transparent, #111315);
+    background: linear-gradient(180deg, transparent, #0a0a0a);
 }
 
 .landing-value-strip {
@@ -1549,7 +1549,7 @@
 }
 
 .landing-section {
-    background: #111315;
+    background: #0a0a0a;
 }
 
 .section-overline {
@@ -1651,7 +1651,7 @@
 
 .cta-mark {
     background: #00f2fe;
-    color: #111315;
+    color: #0a0a0a;
     box-shadow: 0 8px 20px #00f2fe20;
 }
 
@@ -1674,7 +1674,7 @@
 
 @media (max-width: 720px) {
     .landing-nav {
-        background: #111315;
+        background: #0a0a0a;
     }
 
     .landing-value-strip {

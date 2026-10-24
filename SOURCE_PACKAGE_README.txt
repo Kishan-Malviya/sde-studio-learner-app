@@ -25,8 +25,9 @@ Main areas
 
 CSS color Structure
 -------------------
-background - #111315
-primary button-color - #00f2fe / text color - #111315
+primary-background - #0a0a0a
+secondary-background - #202327
+primary button-color - #00f2fe / text color - #0a0a0a
 secondary button-color - #202327 / text color - #f0f2f4
 primary text-color - #f5f7f8
 secondary text-color - #b3bac4

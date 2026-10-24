@@ -23,8 +23,8 @@ export class LearnerSidebarComponent {
     {
       title: 'LEARNING',
       items: [
-        { label: 'My Learning', icon: 'school', route: '/my-learning' },
         { label: 'Explore Courses', icon: 'explore', route: '/courses' },
+        { label: 'My Learning', icon: 'school', route: '/my-learning' },
         { label: 'Learning Track', icon: 'route', route: '/learning-track' },
       ],
     },

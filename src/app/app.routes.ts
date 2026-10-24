@@ -94,19 +94,11 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'profile',
+        path: 'owner',
         component: LearnerPageComponent,
         data: {
-          title: 'My Profile',
-          description: 'Manage your learner profile.',
-        },
-      },
-      {
-        path: 'settings',
-        component: LearnerPageComponent,
-        data: {
-          title: 'Settings',
-          description: 'Manage your learning preferences.',
+          title: 'Administation',
+          description: 'Manage your learner contents.',
         },
       },
     ],

@@ -25,6 +25,7 @@
   min-height: calc(100vh - 76px);
   padding: 28px;
   box-sizing: border-box;
+  background: #0a0a0a;
 }
 
 @media (max-width: 767px) {
