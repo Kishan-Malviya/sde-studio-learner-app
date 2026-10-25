@@ -236,3 +236,5 @@ export class CourseCatalogComponent {
     this.sortBy = 'popular';
   }
 }
+
+export { CourseCatalogComponent as CourseCatalog };

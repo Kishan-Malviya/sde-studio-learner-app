@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LearnerHeader } from './learner-header';
 
 describe('LearnerHeader', () => {
@@ -7,7 +8,7 @@ describe('LearnerHeader', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LearnerHeader],
+      imports: [LearnerHeader, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LearnerHeader);

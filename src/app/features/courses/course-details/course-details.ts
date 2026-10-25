@@ -21,7 +21,7 @@ export interface CourseModule {
   lessons: Lesson[];
 }
 
-export interface CourseDetails {
+export interface CourseDetailsModel {
   id: string;
   title: string;
   description: string;
@@ -54,7 +54,7 @@ type EnrollmentStatus = 'Not Started' | 'In Progress' | 'Completed';
 export class CourseDetailsComponent {
   readonly courseId: string;
 
-  course: CourseDetails | undefined;
+  course: CourseDetailsModel | undefined;
 
   enrollmentStatus: EnrollmentStatus = 'Not Started';
 
@@ -102,7 +102,7 @@ private loadCourse(id: string): void {
 
 
   
-private getInitialStatus(course: CourseDetails): EnrollmentStatus {
+private getInitialStatus(course: CourseDetailsModel): EnrollmentStatus {
   const totalLessons = course.modules.reduce(
     (total, module) => total + module.lessons.length,
     0
@@ -126,7 +126,7 @@ private getInitialStatus(course: CourseDetails): EnrollmentStatus {
 }
 
 
-  private static readonly courseData: CourseDetails[] = [
+  private static readonly courseData: CourseDetailsModel[] = [
     {
       id: 'java-fundamentals',
       title: 'Java Fundamentals',
@@ -652,7 +652,7 @@ private getInitialStatus(course: CourseDetails): EnrollmentStatus {
     }
   ];
 
-  static findCourseById(id: string): CourseDetails | undefined {
+  static findCourseById(id: string): CourseDetailsModel | undefined {
     return this.courseData.find(course => course.id === id);
   }
 
@@ -764,3 +764,5 @@ isLessonCompleted(lessonId: string): boolean {
     }
   }
 }
+
+export { CourseDetailsComponent as CourseDetails };

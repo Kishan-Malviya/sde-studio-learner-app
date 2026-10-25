@@ -13,3 +13,5 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class LearnerHeaderComponent {
   @Output() menuToggle = new EventEmitter<void>();
 }
+
+export { LearnerHeaderComponent as LearnerHeader };

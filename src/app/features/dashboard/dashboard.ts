@@ -162,3 +162,5 @@ export class DashboardComponent {
     return course.id;
   }
 }
+
+export { DashboardComponent as Dashboard };

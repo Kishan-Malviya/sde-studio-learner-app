@@ -45,3 +45,5 @@ export class LearnerSidebarComponent {
     },
   ];
 }
+
+export { LearnerSidebarComponent as LearnerSidebar };

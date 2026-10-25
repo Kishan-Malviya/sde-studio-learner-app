@@ -44,3 +44,5 @@ export class LearnerLayoutComponent implements OnInit {
     }
   }
 }
+
+export { LearnerLayoutComponent as LearnerLayout };

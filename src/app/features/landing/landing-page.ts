@@ -33,3 +33,5 @@ export class LandingPageComponent {
     { number: '03', title: 'Keep your momentum', description: 'Save notes, bookmark lessons, and see your progress.' },
   ];
 }
+
+export { LandingPageComponent as LandingPage };

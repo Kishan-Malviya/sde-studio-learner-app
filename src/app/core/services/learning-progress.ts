@@ -7,7 +7,7 @@ type CourseProgress = Record<string, string[]>;
 @Injectable({
   providedIn: 'root'
 })
-export class LearningProgressService {
+export class LearningProgress {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
@@ -164,3 +164,5 @@ export class LearningProgressService {
     }
   }
 }
+
+export const LearningProgressService = LearningProgress;

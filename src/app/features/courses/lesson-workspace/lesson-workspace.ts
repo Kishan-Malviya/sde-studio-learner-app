@@ -263,3 +263,5 @@ private refreshRouteState(): void {
     return `Lesson ${this.currentIndex + 1} of ${this.totalLessons}`;
   }
 }
+
+export { LessonWorkspaceComponent as LessonWorkspace };

@@ -23,3 +23,5 @@ export class LearnerPageComponent {
     );
   }
 }
+
+export { LearnerPageComponent as LearnerPage };

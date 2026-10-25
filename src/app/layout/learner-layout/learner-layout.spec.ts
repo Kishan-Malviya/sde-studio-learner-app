@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 import { LearnerLayout } from './learner-layout';
 
 describe('LearnerLayout', () => {
@@ -7,7 +10,15 @@ describe('LearnerLayout', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LearnerLayout],
+      imports: [LearnerLayout, RouterTestingModule],
+      providers: [
+        {
+          provide: BreakpointObserver,
+          useValue: {
+            observe: () => of({ matches: false }),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LearnerLayout);
